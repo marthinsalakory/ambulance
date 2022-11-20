@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'Mitr';
+    src: url('../font/Mitr-Regular.ttf');
+}
+
+* {
+    font-family: 'Mitr';
+}
+
+/* SIDEBAR START */
+.content {
+    position: relative;
+    display: grid;
+    grid-template-columns: 250px auto;
+    height: 92vh;
+}
+
+.content .sidebar {
+    margin-right: 1px;
+}
+
+.content .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.content .sidebar ul li {
+    width: 200px;
+    list-style: none;
+    margin: 20px auto;
+    padding: 0;
+}
+
+.content .sidebar ul li a {
+    display: block;
+    border: 3px solid #000;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+.content .sidebar ul li.active a {
+    padding-left: 10px;
+    text-align: left;
+    background-color: #95BCF2;
+}
+
+.content .sidebar ul li a:hover {
+    padding-left: 10px;
+    text-align: left;
+    background-color: #95BCF2;
+}
+
+.sidebar, .main {
+    border: 3px solid #000;
+}
+
+#show_sidebar {
+    display: none;
+}
+
+.btn-simpan_akun1 {
+    display: inline-block;
+}
+
+.btn-simpan_akun2 {
+    display: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .content {
+        display: grid;
+        grid-template-columns: auto;
+        height: 92vh;
+    }
+
+    .content .sidebar {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #ddd;
+    }
+
+    #show_sidebar {
+        display: inline-block;
+    }
+
+    .btn-simpan_akun1 {
+        display: none;
+    }
+
+    .btn-simpan_akun2 {
+        display: inline-block;
+    }
+}
+
+.input-akun {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+.input-akun:focus {
+    outline: none;
+}
+
+.input-supir {
+    width: 100%;
+    border: none;
+}

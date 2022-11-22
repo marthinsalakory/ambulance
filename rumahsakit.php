@@ -1,4 +1,6 @@
 <?php include 'function.php' ?>
+<?php isLogin('masukuser.php'); ?>
+<?php mustRole('user', 'masukuser.php'); ?>
 <?php include 'header_user.php' ?>
 <div class="container-fluid">
     <div class="row fw-bold" style="background-color: #DDDDDD;">
@@ -22,7 +24,11 @@
         <?php foreach (db_query("SELECT * FROM users WHERE role = 'admin'") as $rs) : ?>
             <div class="col-12 mt-1 position-relative" style="background-color: #ddd;height: 70px;">
                 <span id="tampil_status" class="position-absolute <?= db_count('users', ['user_id' => $rs['id'], 'status' => 'tersedia']) == 0 ? 'bg-danger' : 'bg-primary'; ?> border border-1 border-dark rounded-circle end-0 top-50 translate-middle-y me-5" style="height: 30px; width: 30px;"></span>
-                <p class="ps-2"><?= $rs['nama']; ?><br><?= $rs['no_telp']; ?><br><?= $rs['email']; ?></p>
+                <div class="ps-2">
+                    <a class="text-dark text-decoration-none" target="_blank" href="https://www.google.com/maps/search/?api=1&query=<?= $rs['asal_rumah_sakit']; ?>"><?= $rs['nama']; ?></a><br>
+                    <a href="tel:<?= $rs['no_telp']; ?>"><?= $rs['no_telp']; ?></a><br>
+                    <a href="mailto:<?= $rs['email']; ?>"><?= $rs['email']; ?></a>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>

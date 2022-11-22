@@ -5,6 +5,7 @@ if (isset($_POST['btn-add'])) {
     $nama = htmlspecialchars(strtolower($_POST['nama']));
     $no_telp = htmlspecialchars($_POST['no_telp']);
     $email = htmlspecialchars(strtolower($_POST['email']));
+    $sandi = password_hash($_POST['sandi'], PASSWORD_DEFAULT);
     $no_kendaraan = htmlspecialchars(strtolower($_POST['no_kendaraan']));
 
     // Cek Email
@@ -29,6 +30,7 @@ if (isset($_POST['btn-add'])) {
             'nama' => $nama,
             'no_telp' => $no_telp,
             'email' => $email,
+            'sandi' => $sandi,
             'no_kendaraan' => $no_kendaraan,
             'role' => 'supir'
         ])) {
@@ -47,6 +49,7 @@ if (isset($_POST['btn-edit'])) {
     $no_telp = htmlspecialchars($_POST['no_telp']);
     $email = htmlspecialchars(strtolower($_POST['email']));
     $no_kendaraan = htmlspecialchars(strtolower($_POST['no_kendaraan']));
+    $sandi = password_hash($_POST['sandi'], PASSWORD_DEFAULT);
     $row = db_find('users', ['id' => $_POST['id']]);
     if (empty($row)) {
         setFlash('Gagal mengubah data supir');
@@ -82,6 +85,7 @@ if (isset($_POST['btn-edit'])) {
             'nama' => $nama,
             'no_telp' => $no_telp,
             'email' => $email,
+            'sandi' => $sandi,
             'no_kendaraan' => $no_kendaraan,
             'role' => 'supir'
         ])) {
@@ -112,8 +116,8 @@ if (isset($_POST['btn-delete'])) {
         <tr>
             <th scope="col">Nama</th>
             <th scope="col">No Telp</th>
-            <th scope="col">E-Mail</th>
             <th scope="col">No Kendaraan</th>
+            <th scope="col">Password</th>
             <th scope="col"></th>
         </tr>
     </thead>
@@ -124,8 +128,8 @@ if (isset($_POST['btn-delete'])) {
                     <input placeholder="Masukan Nama" required class="w-100" type="text" name="nama" id="nama">
             </td>
             <td><input placeholder="Masukan No Telepon" required class="w-100" type="number" name="no_telp" id="no_telp"></td>
-            <td><input placeholder="Masukan Email" required class="w-100" type="email" name="email" id="email"></td>
             <td><input placeholder="Masukan No Kendaraan" required class="w-100" type="text" name="no_kendaraan" id="no_kendaraan"></td>
+            <td><input placeholder="Masukan Sandi" required class="w-100" type="password" name="sandi" id="sandi"></td>
             <td>
                 <button name="btn-add" class="btn btn-light border border-dark border-1 btn-sm"><i class="fa fa-add"></i></button>
                 </form>
@@ -139,8 +143,8 @@ if (isset($_POST['btn-delete'])) {
                         <input value="<?= $supir['nama']; ?>" required class="input-supir" type="text" name="nama" id="nama">
                 </td>
                 <td><input value="<?= $supir['no_telp']; ?>" required class="input-supir" type="number" name="no_telp" id="no_telp"></td>
-                <td><input value="<?= $supir['email']; ?>" required class="input-supir" type="email" name="email" id="email"></td>
                 <td><input value="<?= strtoupper($supir['no_kendaraan']); ?>" required class="input-supir" type="text" name="no_kendaraan" id="no_kendaraan"></td>
+                <td><input required class="w-100" type="password" name="sandi" id="sandi" placeholder="Masukan Sandi"></td>
                 <td>
                     <button onclick="return confirm('Ubah data supir ini?')" name="btn-edit" class="btn btn-light btn-sm" style="background-color: #fff;"><i class="fa fa-edit"></i></button>
                     <button onclick="return confirm('Hapus supir ini?')" name="btn-delete" class="btn btn-light btn-sm" style="background-color: #fff;"><i class="fa fa-trash"></i></button>
@@ -150,7 +154,4 @@ if (isset($_POST['btn-delete'])) {
         <?php endforeach; ?>
     </tbody>
 </table>
-<!-- <div class="w-100 text-center">
-    <button class="btn border border-2 border-dark"><i class="fa fa-add"></i></button>
-</div> -->
 <?php include 'footer.php' ?>

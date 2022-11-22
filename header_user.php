@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="assets/leaflet/leaflet.css">
+    <link rel="stylesheet" href="assets/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
     <script src="assets/leaflet/leaflet.js"></script>
+    <script src="assets/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
     <script src="assets/fontawesome/js/all.min.js"></script>

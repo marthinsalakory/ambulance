@@ -1,5 +1,6 @@
 <?php include 'function.php' ?>
-<?php mustRole('user', 'logoutuser.php') ?>
+<?php isLogin('masukuser.php'); ?>
+<?php mustRole('user', 'masukuser.php'); ?>
 <?php
 if (!empty($_POST)) {
     $id = user()->id;

@@ -101,9 +101,20 @@ function isFlash()
     return false;
 }
 
-function db_findAll($table)
+function db_findAll($table, $array = [])
 {
-    return db_query("SELECT * FROM $table");
+    if (empty($array)) {
+        return db_query("SELECT * FROM $table");
+    } else {
+        foreach ($array as $key => $val) {
+            if (isset($result)) {
+                $result = $result . ' && ' . $key .  ' = \'' . $val . '\'';
+            } else {
+                $result = $key .  ' = \'' . $val . '\'';
+            }
+            return db_query("SELECT * FROM $table WHERE $result");
+        }
+    }
 }
 
 function db_find($table, $where)
@@ -138,6 +149,18 @@ function isLogin($url)
     }
 }
 
+function db_count($table, $array)
+{
+    foreach ($array as $key => $val) {
+        if (isset($result)) {
+            $result = $result . ' && ' . $key .  ' = \'' . $val . '\'';
+        } else {
+            $result = $key .  ' = \'' . $val . '\'';
+        }
+    }
+    return db_query("SELECT * FROM `$table` WHERE $result")->num_rows;
+}
+
 function user()
 {
     isLogin('logout.php');
@@ -169,16 +192,4 @@ function getDistanceBetweenPoints($latlng1, $latlng2)
     $kilometers = $miles * 1.609344;
     $meters = $kilometers * 1000;
     return compact('miles', 'feet', 'yards', 'kilometers', 'meters');
-}
-
-function db_count($table, $array)
-{
-    foreach ($array as $key => $val) {
-        if (isset($result)) {
-            $result = $result . ' && ' . $key .  ' = \'' . $val . '\'';
-        } else {
-            $result = $key .  ' = \'' . $val . '\'';
-        }
-    }
-    return db_query("SELECT * FROM `$table` WHERE $result")->num_rows;
 }

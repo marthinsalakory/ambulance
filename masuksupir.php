@@ -4,14 +4,14 @@ if (!empty($_POST)) {
     $no_telp = htmlspecialchars(strtolower($_POST['no_telp']));
     $sandi = $_POST['sandi'];
 
-    if ($row = db_find("users", ['no_telp' => $no_telp, 'role' => 'user'])) {
+    if ($row = db_find("users", ['no_telp' => $no_telp, 'role' => 'supir'])) {
         if (password_verify($sandi, $row->sandi)) {
             $_SESSION['login'] = true;
             $_SESSION['user'] = $row;
-            header("Location: darurat.php");
+            header("Location: permintaan.php");
             exit;
         } else {
-            setFlash('Gagal Masuk');
+            setFlash('Gagal Masukk');
         }
     } else {
         setFlash('Gagal Masuk');

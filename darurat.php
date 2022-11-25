@@ -2,6 +2,11 @@
 <?php isLogin('masukuser.php'); ?>
 <?php mustRole('user', 'masukuser.php'); ?>
 <?php
+$user_id = user()->id;
+if ($row = db_query("SELECT * FROM pesanmasuk WHERE user_id = '$user_id' && tugas_pasien != 'selesai'")->fetch_object()) {
+    header("Location: penjemputan.php");
+    exit;
+}
 if (!empty($_POST)) {
     if ($_POST['jumlah_supir'] != 0) {
         $id = uniqid();
@@ -11,7 +16,7 @@ if (!empty($_POST)) {
             'lokasi_user' => $_POST['titik_jemput'],
             'rs_id' => $_POST['rs_id']
         ])) {
-            header('Location: penjemputan.php?pesan_id' . $id);
+            header('Location: penjemputan.php');
             exit;
         } else {
             setFlash('Gagal Memesan Ambulance');

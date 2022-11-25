@@ -2,6 +2,11 @@
 <?php isLogin('masukuser.php'); ?>
 <?php mustRole('user', 'masukuser.php'); ?>
 <?php
+$user_id = user()->id;
+if ($row = db_query("SELECT * FROM pesanmasuk WHERE user_id = '$user_id' && tugas_pasien != 'selesai'")->fetch_object()) {
+    header("Location: penjemputan.php");
+    exit;
+}
 if (!empty($_POST)) {
     $id = user()->id;
     $nama = htmlspecialchars(strtolower($_POST['nama']));

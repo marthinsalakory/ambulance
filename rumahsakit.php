@@ -1,6 +1,12 @@
 <?php include 'function.php' ?>
 <?php isLogin('masukuser.php'); ?>
 <?php mustRole('user', 'masukuser.php'); ?>
+<?php
+$user_id = user()->id;
+if ($row = db_query("SELECT * FROM pesanmasuk WHERE user_id = '$user_id' && tugas_pasien != 'selesai'")->fetch_object()) {
+    header("Location: penjemputan.php");
+    exit;
+} ?>
 <?php include 'header_user.php' ?>
 <div class="container-fluid">
     <div class="row fw-bold" style="background-color: #DDDDDD;">

@@ -8,6 +8,18 @@ $pesan = db_query("SELECT * FROM pesanmasuk WHERE supir_id = '$user_id' && tugas
 $user_location = $pesan->lokasi_user;
 $rs_location = db_find('users', ['id' => $pesan->rs_id])->asal_rumah_sakit;
 
+if (isset($_POST['selesai'])) {
+    if (db_update('pesanmasuk', ['id' => $pesan->id], [
+        'tugas_supir' => 'selesai'
+    ])) {
+        setFlash('Terimakasih telah memesan ambulance');
+        header("Location: darurat.php");
+        exit;
+    } else {
+        setFlash('Gagal Selesai');
+    }
+}
+
 ?>
 <?php include 'header_user.php' ?>
 <div class="container-fluid">
@@ -55,9 +67,10 @@ $rs_location = db_find('users', ['id' => $pesan->rs_id])->asal_rumah_sakit;
                 </div>
             </div>
         </div>
-        <div class="card-footer text-center">
+        <form method="POST" class="card-footer text-center">
+            <input type="hidden" name="selesai" id="selesai">
             <button class="btn btn-light border border-1 border-dark">Selesai</button>
-        </div>
+        </form>
     </div>
 </div>
 <script>

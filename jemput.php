@@ -13,7 +13,7 @@ if (isset($_POST['selesai'])) {
         'tugas_supir' => 'selesai'
     ])) {
         setFlash('Terimakasih telah memesan ambulance');
-        header("Location: darurat.php");
+        header("Location: permintaan.php");
         exit;
     } else {
         setFlash('Gagal Selesai');

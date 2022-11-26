@@ -6,7 +6,9 @@
     </div>
 </div>
 <script>
-    const map = L.map('map').setView([<?= user()->asal_rumah_sakit; ?>], 13);
+    const map = L.map('map', {
+        attributionControl: false
+    }).setView([<?= user()->asal_rumah_sakit; ?>], 13);
 
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,

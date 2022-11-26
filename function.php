@@ -2,7 +2,12 @@
 
 if (!session_id()) session_start();
 
-$db_conn = mysqli_connect('localhost', 'root', '', 'ambulance');
+$db_host = 'localhost';
+$db_user = 'root';
+$db_pass = '';
+$db_name = 'ambulance';
+
+$db_conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
 $SCRIPT_FILENAME = explode('/', $_SERVER['SCRIPT_FILENAME']);
 $FILENAME = explode('.', end($SCRIPT_FILENAME))[0];
@@ -68,6 +73,14 @@ function old_value($key)
     }
 }
 
+
+if (isset($_GET['database'])) {
+    echo "db_host = " . $db_host . '<br>';
+    echo "db_user = " . $db_user . '<br>';
+    echo "db_pass = " . $db_pass . '<br>';
+    echo "db_name = " . $db_name . '<br>';
+    die;
+}
 
 function setFlash($pesan)
 {

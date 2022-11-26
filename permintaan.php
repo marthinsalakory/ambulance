@@ -2,7 +2,9 @@
 <?php isLogin('masuksupir.php'); ?>
 <?php mustRole('supir', 'masuksupir.php'); ?>
 <?php
+$null = null;
 $user_id = user()->id;
+$rs_id = user()->user_id;
 if (db_query("SELECT * FROM pesanmasuk WHERE supir_id = '$user_id' && tugas_supir != 'selesai'")->fetch_object()) {
     header("Location: jemput.php");
     exit;
@@ -39,7 +41,7 @@ if (!empty($_POST)) {
     </div>
 </div>
 <?= flash(); ?>
-<?php foreach (db_findAll('pesanmasuk', ['rs_id' => user()->user_id, 'supir_id' => null]) as $pesan) : ?>
+<?php foreach (db_query("SELECT * FROM pesanmasuk WHERE rs_id = '$rs_id' && supir_id IS NULL") as $pesan) : ?>
     <div class="card text-center position-relative w-100" style="background-color: #EEEEEE;">
         <i class="fa-solid fa-bullhorn position-absolute ms-3 text-danger start-0 top-50 translate-middle-y"></i>
         <form method="POST" class="card-body">

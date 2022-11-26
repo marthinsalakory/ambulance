@@ -68,6 +68,14 @@ if (isset($_POST['selesai'])) {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
+    var marker_ambulance = L.marker([-3.658062, 128.193283]);
+    var route_ambulance = L.Routing.control({
+        waypoints: [
+            L.latLng([1, 1]),
+            L.latLng([12, 12]),
+        ]
+    });
+
     function api_pesan() {
         $.ajax({
             url: "api.php",
@@ -79,14 +87,16 @@ if (isset($_POST['selesai'])) {
             success: function(result) {
                 $('#tugas_pasien').text(result.tugas_pasien);
                 if (result.supir_id) {
-                    L.marker(result.lokasi_supir.split(", "), {
+                    map.removeLayer(marker_ambulance);
+                    marker_ambulance = L.marker(result.lokasi_supir.split(", "), {
                         icon: L.icon({
                             iconUrl: 'assets/img/icon_location_red.png',
                             iconSize: [20, 20],
                             iconAnchor: [10, 20],
                             popupAnchor: [0, -20]
                         })
-                    }).addTo(map).bindPopup('Lokasi Ambulance.').openPopup();
+                    });
+                    marker_ambulance.addTo(map).bindPopup('Lokasi Ambulance.').openPopup();
 
                     L.marker([<?= $user_location; ?>], {
                         icon: L.icon({
@@ -106,7 +116,8 @@ if (isset($_POST['selesai'])) {
                         })
                     }).addTo(map).bindPopup('Lokasi Rumah Sakit.');
 
-                    L.Routing.control({
+                    map.removeControl(route_ambulance);
+                    route_ambulance = L.Routing.control({
                         waypoints: [
                             L.latLng(result.lokasi_supir.split(", ")),
                             L.latLng(<?= $user_location; ?>),
@@ -119,13 +130,15 @@ if (isset($_POST['selesai'])) {
                             }],
                             addWaypoints: false
                         },
+                        show: false,
                         fitSelectedRoutes: true,
                         draggableWaypoints: false,
                         routeWhileDragging: false,
                         createMarker: function() {
                             return null;
                         }
-                    }).addTo(map);
+                    });
+                    route_ambulance.addTo(map);
 
                     $.ajax({
                         url: "api.php",

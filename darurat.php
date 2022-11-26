@@ -100,8 +100,12 @@ if (!empty($_POST)) {
 </div>
 
 <script>
-    const map = L.map('map').setView([-3.658062, 128.193283], 10);
-    const pilih_map = L.map('pilih_map').setView([-3.658062, 128.193283], 10);
+    const map = L.map('map', {
+        attributionControl: false
+    }).setView([-3.658062, 128.193283], 10);
+    const pilih_map = L.map('pilih_map', {
+        attributionControl: false
+    }).setView([-3.658062, 128.193283], 10);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -142,7 +146,7 @@ if (!empty($_POST)) {
                 iconAnchor: [10, 20],
                 popupAnchor: [0, -20]
             })
-        }).addTo(map).bindPopup(`<div onclick="$('#rs_id').val('<?= $rs['id']; ?>');$('#nama_rs').val('<?= $rs['nama']; ?>')" data-bs-toggle="modal" data-bs-target="#modal_rs" class="col-12 position-relative mt-1" style="cursor: pointer"><b><?= $rs['nama']; ?></b><br /><?= $rs['no_telp']; ?><br>supir: <?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]) == 0 ? 'tidak tersedia' : 'tersedia'; ?>.</div>`);
+        }).addTo(map).bindPopup(`<div onclick="$('#jumlah_supir').val('<?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]); ?>');$('#rs_id').val('<?= $rs['id']; ?>');$('#nama_rs').val('<?= $rs['nama']; ?>')" data-bs-toggle="modal" data-bs-target="#modal_rs" class="col-12 position-relative mt-1" style="cursor: pointer"><b><?= $rs['nama']; ?></b><br /><?= $rs['no_telp']; ?><br>supir: <?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]) == 0 ? 'tidak tersedia' : 'tersedia'; ?>.</div>`);
     <?php endforeach; ?>
 </script>
 <?php include 'footer_auth.php' ?>

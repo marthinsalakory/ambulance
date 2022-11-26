@@ -146,6 +146,14 @@ if (isset($_POST['selesai'])) {
         alert('Akses lokasi tidak diijinkan');
     }
 
+    var marker_ambulance = L.marker([-3.658062, 128.193283]);
+    var route_ambulance = L.Routing.control({
+        waypoints: [
+            L.latLng([1, 1]),
+            L.latLng([12, 12]),
+        ]
+    });
+
     function showPosition(position) {
         // alert(position.coords.latitude);
         $.ajax({
@@ -158,15 +166,20 @@ if (isset($_POST['selesai'])) {
                 // alert(result);
             }
         });
-        L.marker([position.coords.latitude, position.coords.longitude], {
+
+        map.removeLayer(marker_ambulance);
+        marker_ambulance = L.marker([position.coords.latitude, position.coords.longitude], {
             icon: L.icon({
                 iconUrl: 'assets/img/icon_location_red.png',
                 iconSize: [20, 20],
                 iconAnchor: [10, 20],
                 popupAnchor: [0, -20]
             })
-        }).addTo(map).bindPopup('Lokasi Ambulance.');
-        L.Routing.control({
+        });
+        marker_ambulance.addTo(map).bindPopup('Lokasi Ambulance.');
+
+        map.removeControl(route_ambulance);
+        route_ambulance = L.Routing.control({
             waypoints: [
                 L.latLng([position.coords.latitude, position.coords.longitude]),
                 L.latLng(<?= $user_location; ?>),
@@ -179,13 +192,15 @@ if (isset($_POST['selesai'])) {
                 }],
                 addWaypoints: false
             },
+            show: false,
             fitSelectedRoutes: true,
             draggableWaypoints: false,
             routeWhileDragging: false,
             createMarker: function() {
                 return null;
             }
-        }).addTo(map);
+        });
+        route_ambulance.addTo(map);
     }
 
 

@@ -15,11 +15,7 @@ if (!empty($_POST)) {
 
     // Cek Sandi
     if ($_POST['sandi']) {
-        if ($_POST['sandi'] != $_POST['sandi1']) {
-            setFlash('Konfirmasi sandi tidak sama');
-        } else {
-            $sandi = password_hash($_POST['sandi'], PASSWORD_DEFAULT);
-        }
+        $sandi = password_hash($_POST['sandi'], PASSWORD_DEFAULT);
     } else {
         $sandi = user()->sandi;
     }

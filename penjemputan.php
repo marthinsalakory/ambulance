@@ -173,7 +173,8 @@ if (isset($_POST['selesai'])) {
                         })
                     }).addTo(map).bindPopup('Lokasi Rumah Sakit.');
 
-                    L.Routing.control({
+                    map.removeControl(route_ambulance);
+                    route_ambulance = L.Routing.control({
                         waypoints: [
                             L.latLng(<?= $user_location; ?>),
                             L.latLng(<?= $rs_location ?>)
@@ -185,13 +186,15 @@ if (isset($_POST['selesai'])) {
                             }],
                             addWaypoints: false
                         },
+                        show: false,
                         fitSelectedRoutes: true,
                         draggableWaypoints: false,
                         routeWhileDragging: false,
                         createMarker: function() {
                             return null;
                         }
-                    }).addTo(map);
+                    });
+                    route_ambulance.addTo(map);
                     $('#data_supir').html(`
                         <div class="spinner-border text-primary" role="status">
                             <span class="visually-hidden"></span>

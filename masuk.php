@@ -1,5 +1,6 @@
 <?php include 'function.php' ?>
 <?php
+noLogin();
 if (!empty($_POST)) {
     $email = htmlspecialchars(strtolower($_POST['email']));
     // $asal_rumah_sakit = htmlspecialchars(strtolower($_POST['asal_rumah_sakit']));

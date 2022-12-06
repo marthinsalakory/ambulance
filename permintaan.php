@@ -29,14 +29,14 @@ if (!empty($_POST)) {
 <?php include 'header_user.php' ?>
 <div class="container-fluid">
     <div class="row fw-bold" style="background-color: #DDDDDD;">
-        <!-- <div class="col-4 h-100 my-auto ps-5">
-            <a href="darurat.php" class="text-dark text-decoration-none"><i class="fa-solid fa-chevron-left"></i></a>
-        </div> -->
-        <div class="col-12 d-flex justify-content-center">
-            <div class="text-center" style="width: 100px;">
+        <div class="col-4 h-100 my-auto ps-5">
+            <a href="logoutsupir.php" onclick="return confirm('Yakin ingin Logout?')" class="text-dark text-decoration-none"><i class="fa fa-power-off"></i></a>
+        </div>
+        <div class="col-4 d-flex justify-content-center">
+            <a href="" class="text-center text-decoration-none text-dark" style="width: 100px;">
                 <img src="assets/img/ambulance-car.png" width="60">
                 <span>Ambulance</span>
-            </div>
+            </a>
         </div>
     </div>
 </div>

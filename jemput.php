@@ -25,10 +25,10 @@ if (isset($_POST['selesai'])) {
 <div class="container-fluid">
     <div class="row fw-bold" style="background-color: #DDDDDD;">
         <div class="col-12 d-flex justify-content-center">
-            <div class="text-center" style="width: 100px;">
+            <a href="" class="text-center text-decoration-none text-dark" style="width: 100px;">
                 <img src="assets/img/ambulance-car.png" width="60">
                 <span>Ambulance</span>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -63,7 +63,7 @@ if (isset($_POST['selesai'])) {
                     <i class="fa-solid fa-mobile-screen"></i>
                 </div>
                 <div class="col-11">
-                    <input onclick="window.location.href='tel:' + $(this).val()" id="no_telp_user" readonly class="input-akun bg-transparent text-center" type="text" placeholder="No Telp User">
+                    <input onclick="copyToClipboard()" id="no_telp_user" readonly class="input-akun bg-transparent text-center" type="text" placeholder="No Telp User">
                 </div>
             </div>
         </div>
@@ -221,5 +221,20 @@ if (isset($_POST['selesai'])) {
             popupAnchor: [0, -20]
         })
     }).addTo(map).bindPopup('Lokasi Rumah Sakit.');
+
+    function copyToClipboard() {
+        // Get the text field
+        var copyText = document.getElementById("no_telp_user");
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        // Alert the copied text
+        alert("Copied the text: " + copyText.value);
+    }
 </script>
 <?php include 'footer_user.php'; ?>

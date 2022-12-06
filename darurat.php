@@ -22,7 +22,7 @@ if (!empty($_POST)) {
             setFlash('Gagal Memesan Ambulance');
         }
     } else {
-        setFlash("Gagal, Tidak ada supir ambulance pada rumah sakit ini.");
+        setFlash("Gagal, Supir tidak Tersedia.");
     }
 }
 ?>
@@ -30,10 +30,10 @@ if (!empty($_POST)) {
 <div class="container-fluid">
     <div class="row fw-bold" style="background-color: #DDDDDD;">
         <div class="col-12 d-flex justify-content-center">
-            <div class="text-center" style="width: 100px;">
+            <a href="" class="text-center text-decoration-none text-dark" style="width: 100px;">
                 <img src="assets/img/ambulance-car.png" width="60">
                 <span>Ambulance</span>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -45,8 +45,8 @@ if (!empty($_POST)) {
             <p>Rumah Sakit Terdekat</p>
         </div>
         <?php foreach (db_findAll('users', ['role' => 'admin']) as $rs) : ?>
-            <div onclick="$('#jumlah_supir').val('<?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]); ?>');$('#rs_id').val('<?= $rs['id']; ?>');$('#nama_rs').val('<?= $rs['nama']; ?>')" data-bs-toggle="modal" data-bs-target="#modal_rs" class="col-12 position-relative mt-1" style="background-color: #ddd;height: 50px; cursor: pointer;">
-                <span class="position-absolute <?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]) != 0 ? 'bg-primary' : 'bg-danger'; ?> border border-1 border-dark rounded-circle end-0 top-50 translate-middle-y me-5" style="height: 30px; width: 30px;"></span>
+            <div onclick="$('#jumlah_supir').val('<?= db_count('users', ['id' => $rs['id'], 'tersedia' => 'on']); ?>');$('#rs_id').val('<?= $rs['id']; ?>');$('#nama_rs').val('<?= $rs['nama']; ?>')" data-bs-toggle="modal" data-bs-target="#modal_rs" class="col-12 position-relative mt-1" style="background-color: #ddd;height: 50px; cursor: pointer;">
+                <span class="position-absolute <?= db_count('users', ['id' => $rs['id'], 'tersedia' => 'on']) ? 'bg-primary' : 'bg-danger'; ?> border border-1 border-dark rounded-circle end-0 top-50 translate-middle-y me-5" style="height: 30px; width: 30px;"></span>
                 <p class="ps-2">
                     <span><?= $rs['nama']; ?></span><br>
                     <span><?= $rs['no_telp']; ?></span>
@@ -57,7 +57,7 @@ if (!empty($_POST)) {
     <div class="card position-fixed bottom-0 w-100">
         <div class="card-body d-flex justify-content-evenly">
             <a href="akunuser.php" class="pt-3 btn btn-secondary btn-sm mt-3 p-0 m-0" style="font-size: 10px;;width: 70px; height: 70px; border-radius: 50%;"><i class="fa-solid fa-address-card"></i><br> Akun</a>
-            <a href="" class="pt-3 btn btn-danger btn-sm mb-3 p-0 m-0" style="font-size: 10px;;width: 70px; height: 70px; border-radius: 50%;"><i class="fa-solid fa-truck-medical"></i><br> Darurat</a>
+            <a href="darurat.php" class="pt-3 btn btn-danger btn-sm mb-3 p-0 m-0" style="font-size: 10px;;width: 70px; height: 70px; border-radius: 50%;"><i class="fa-solid fa-truck-medical"></i><br> Darurat</a>
             <a href="rumahsakit.php" class="pt-3 btn btn-secondary btn-sm mt-3 p-0 m-0" style="font-size: 10px;;width: 70px; height: 70px; border-radius: 50%;"><i class="fa-solid fa-hospital"></i><br> Rumah Sakit</a>
         </div>
     </div>
@@ -141,12 +141,12 @@ if (!empty($_POST)) {
     <?php foreach (db_findAll('users', ['role' => 'admin']) as $rs) : ?>
         L.marker([<?= $rs['asal_rumah_sakit']; ?>], {
             icon: L.icon({
-                iconUrl: 'assets/img/icon_location_<?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]) == 0 ? 'red.png' : 'blue.png'; ?>',
+                iconUrl: 'assets/img/icon_location_<?= db_count('users', ['id' => $rs['id'], 'tersedia' => 'on']) ? 'blue.png' : 'red.png'; ?>',
                 iconSize: [20, 20],
                 iconAnchor: [10, 20],
                 popupAnchor: [0, -20]
             })
-        }).addTo(map).bindPopup(`<div onclick="$('#jumlah_supir').val('<?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]); ?>');$('#rs_id').val('<?= $rs['id']; ?>');$('#nama_rs').val('<?= $rs['nama']; ?>')" data-bs-toggle="modal" data-bs-target="#modal_rs" class="col-12 position-relative mt-1" style="cursor: pointer"><b><?= $rs['nama']; ?></b><br /><?= $rs['no_telp']; ?><br>supir: <?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]) == 0 ? 'tidak tersedia' : 'tersedia'; ?>.</div>`);
+        }).addTo(map).bindPopup(`<div onclick="$('#jumlah_supir').val('<?= db_count('users', ['id' => $rs['id'], 'tersedia' => 'on']); ?>');$('#rs_id').val('<?= $rs['id']; ?>');$('#nama_rs').val('<?= $rs['nama']; ?>')" data-bs-toggle="modal" data-bs-target="#modal_rs" class="col-12 position-relative mt-1" style="cursor: pointer"><b><?= $rs['nama']; ?></b><br /><?= $rs['no_telp']; ?><br>supir: <?= db_count('users', ['role' => 'supir', 'status' => 'tersedia', 'user_id' => $rs['id']]) == 0 ? 'tidak tersedia' : 'tersedia'; ?>.</div>`);
     <?php endforeach; ?>
 </script>
 <?php include 'footer_auth.php' ?>

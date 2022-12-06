@@ -4,14 +4,14 @@
 if (isset($_POST['btn-add'])) {
     $nama = htmlspecialchars(strtolower($_POST['nama']));
     $no_telp = htmlspecialchars($_POST['no_telp']);
-    $email = htmlspecialchars(strtolower($_POST['email']));
+    // $email = htmlspecialchars(strtolower($_POST['email']));
     $sandi = password_hash($_POST['sandi'], PASSWORD_DEFAULT);
     $no_kendaraan = htmlspecialchars(strtolower($_POST['no_kendaraan']));
 
     // Cek Email
-    if (db_find('users', ['email' => $email])) {
-        setFlash('Email sudah terdaftar');
-    }
+    // if (db_find('users', ['email' => $email])) {
+    //     setFlash('Email sudah terdaftar');
+    // }
 
     // Cek Nomor Telephone
     if (db_find('users', ['no_telp' => $no_telp])) {
@@ -29,7 +29,7 @@ if (isset($_POST['btn-add'])) {
             'id' => uniqid(),
             'nama' => $nama,
             'no_telp' => $no_telp,
-            'email' => $email,
+            // 'email' => $email,
             'sandi' => $sandi,
             'no_kendaraan' => $no_kendaraan,
             'role' => 'supir'

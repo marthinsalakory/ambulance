@@ -117,4 +117,9 @@ if (!empty($_POST)) {
         </div>
     </form>
 </div>
+<div class="row mt-4">
+    <div class="col-12 text-end">
+        <a onclick="return confirm('Keluar?')" href="logout.php" class="text-center text-dark text-decoration-none btn btn-light border border-dark border-3" style="width: 100px;">Keluar</a>
+    </div>
+</div>
 <?php include 'footer.php' ?>

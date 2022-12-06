@@ -58,10 +58,10 @@ if (!empty($_POST)) {
             <a href="darurat.php" class="text-dark text-decoration-none"><i class="fa-solid fa-chevron-left"></i></a>
         </div>
         <div class="col-4 d-flex justify-content-center">
-            <div class="text-center" style="width: 100px;">
+            <a href="" class="text-center text-decoration-none text-dark" style="width: 100px;">
                 <img src="assets/img/ambulance-car.png" width="60">
                 <span>Ambulance</span>
-            </div>
+            </a>
         </div>
     </div>
 </div>

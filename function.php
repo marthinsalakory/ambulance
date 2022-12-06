@@ -2,10 +2,10 @@
 
 if (!session_id()) session_start();
 
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '';
-$db_name = 'ambulance';
+$db_host = '194.163.42.212';
+$db_user = 'u1572267_ambulance';
+$db_pass = '20010114Marthin';
+$db_name = 'u1572267_ambulance';
 
 $db_conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
@@ -159,6 +159,22 @@ function isLogin($url)
     if (!isset($_SESSION['login']) && !isset($_SESSION['user'])) {
         header("Location: $url");
         exit;
+    }
+}
+
+function noLogin()
+{
+    if (isset($_SESSION['login']) && isset($_SESSION['user'])) {
+        if ($_SESSION['user']->role == 'admin') {
+            header("Location: index.php");
+            exit;
+        } else if ($_SESSION['user']->role == 'user') {
+            header("Location: darurat.php");
+            exit;
+        } else if ($_SESSION['user']->role == 'supir') {
+            header("Location: permintaan.php");
+            exit;
+        }
     }
 }
 

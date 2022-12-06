@@ -1,5 +1,6 @@
 <?php
 include 'function.php';
+noLogin();
 if (!empty($_POST)) {
     $id = uniqid();
     $nama = htmlspecialchars(strtolower($_POST['nama']));

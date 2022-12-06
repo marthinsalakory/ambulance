@@ -24,10 +24,10 @@ if (isset($_POST['selesai'])) {
 <div class="container-fluid">
     <div class="row fw-bold" style="background-color: #DDDDDD;">
         <div class="col-12 d-flex justify-content-center">
-            <div class="text-center" style="width: 100px;">
+            <a href="" class="text-center text-decoration-none text-dark" style="width: 100px;">
                 <img src="assets/img/ambulance-car.png" width="60">
                 <span>Ambulance</span>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -150,7 +150,7 @@ if (isset($_POST['selesai'])) {
                         success: function(res) {
                             $('#data_supir').html(`
                                 <div id="nama_supir">` + res.nama + `</div>
-                                <div><a id="no_telp_supir" href="tel:` + res.no_telp + `">` + res.no_telp + `</a></div>
+                                <div><a id="no_telp_supir">` + res.no_telp + `</a></div>
                             `);
                         }
                     });
@@ -217,7 +217,6 @@ if (isset($_POST['selesai'])) {
             success: function(result) {
                 $('#nama_rs').text(result.nama);
                 $('#no_telp_rs').text(result.no_telp);
-                $('#no_telp_rs').attr('href', 'tel:' + result.no_telp);
             }
         });
     }

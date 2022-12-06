@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ambulance</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/ambulance-car.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -18,19 +19,19 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row fw-bold" style="background-color: #DDDDDD;">
-            <div class="col-4 ps-5 text-start h-100 my-auto">
+    <div class="container-fluid" style="background-color: #DDDDDD;">
+        <div class="d-flex justify-content-between fw-bold">
+            <div class="text-start h-100 my-auto">
                 <div class="text-center" style="width: 100px;">
                     <img src="assets/img/ambulance-car.png" width="60">
                     <span>Ambulance</span>
                 </div>
             </div>
-            <div class="col-4 text-center h-100 my-auto">
+            <div class="h-100 my-auto">
                 <button class="btn" id="show_sidebar" onclick="$('.content .sidebar').toggle()"><i class="fa-solid fa-caret-down"></i></button>
                 <h3>ADMIN</h3>
             </div>
-            <div class="col-4 pe-5 h-100 my-auto d-flex justify-content-end">
+            <div class="h-100 my-auto d-flex justify-content-end">
                 <div class="text-center" style="width: 150px;">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="masuk.php" type="button" class="btn border border-dark border-1" style="<?= $FILENAME == 'masuk' ? 'background-color: #95BCF2;' : ''; ?>">Masuk</a>

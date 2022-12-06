@@ -1,5 +1,14 @@
 <?php isLogin('logout.php'); ?>
 <?php mustRole('admin', 'logout.php'); ?>
+<?php
+if (isset($_POST['tersedia'])) {
+    if (user()->tersedia == 'on') {
+        db_update('users', ['id' => user()->id], ['tersedia' => 'off']);
+    } else {
+        db_update('users', ['id' => user()->id], ['tersedia' => 'on']);
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +16,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ambulance</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="assets/img/ambulance-car.png">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="assets/leaflet/leaflet.css">
@@ -20,9 +30,9 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row fw-bold" style="background-color: #DDDDDD;">
-            <div class="col-4 ps-5 text-start h-100 my-auto">
+    <div class="container-fluid" style="background-color: #DDDDDD;">
+        <div class="d-flex justify-content-between fw-bold">
+            <div class="text-start h-100 my-auto">
                 <div class="text-center" style="width: 100px;">
                     <img src="assets/img/ambulance-car.png" width="60">
                     <span>Ambulance</span>
@@ -32,11 +42,12 @@
                 <button class="btn" id="show_sidebar" onclick="$('.content .sidebar').toggle()"><i class="fa-solid fa-caret-down"></i></button>
                 <h3>ADMIN</h3>
             </div>
-            <div class="col-4 pe-5 h-100 my-auto d-flex justify-content-end">
-                <a onclick="return confirm('Keluar?')" href="logout.php" class="text-center text-dark text-decoration-none" style="width: 100px;">
-                    <i class="fa fa-power-off"></i><br>
-                    Keluar
-                </a>
+            <div class="h-100 my-auto d-flex justify-content-end">
+                <form onclick="$(this).submit();" method="POST" class="form-check form-switch">
+                    <input type="hidden" name="tersedia">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" <?= user()->tersedia == 'on' ? 'checked' : ''; ?>>
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Tersedia</label>
+                </form>
             </div>
         </div>
     </div>

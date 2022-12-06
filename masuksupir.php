@@ -1,5 +1,6 @@
 <?php include 'function.php' ?>
 <?php
+noLogin();
 if (!empty($_POST)) {
     $no_telp = htmlspecialchars(strtolower($_POST['no_telp']));
     $sandi = $_POST['sandi'];
@@ -22,10 +23,10 @@ if (!empty($_POST)) {
 <div class="container-fluid">
     <div class="row fw-bold" style="background-color: #DDDDDD;">
         <div class="col-12 d-flex justify-content-center">
-            <div class="text-center" style="width: 100px;">
+            <a href="" class="text-center text-decoration-none text-dark" style="width: 100px;">
                 <img src="assets/img/ambulance-car.png" width="60">
                 <span>Ambulance</span>
-            </div>
+            </a>
         </div>
     </div>
 </div>

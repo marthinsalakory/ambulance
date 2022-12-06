@@ -1,5 +1,6 @@
 <?php include 'function.php' ?>
 <?php
+noLogin();
 if (!empty($_POST)) {
     $nama = htmlspecialchars(strtolower($_POST['nama']));
     $no_telp = htmlspecialchars(strtolower($_POST['no_telp']));
@@ -37,6 +38,16 @@ if (!empty($_POST)) {
 }
 ?>
 <?php include 'header_user.php' ?>
+<div class="container-fluid">
+    <div class="row fw-bold" style="background-color: #DDDDDD;">
+        <div class="col-12 d-flex justify-content-center">
+            <a href="" class="text-center text-decoration-none text-dark" style="width: 100px;">
+                <img src="assets/img/ambulance-car.png" width="60">
+                <span>Ambulance</span>
+            </a>
+        </div>
+    </div>
+</div>
 <div class="card mt-5">
     <form method="POST" class="card-body">
         <div class="row">

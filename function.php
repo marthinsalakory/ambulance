@@ -2,15 +2,15 @@
 
 if (!session_id()) session_start();
 
-// $db_host = '194.163.42.212';
-// $db_user = 'u1572267_ambulance';
-// $db_pass = '20010114Marthin';
-// $db_name = 'u1572267_ambulance';
+$db_host = '194.163.42.212';
+$db_user = 'u1572267_ambulance';
+$db_pass = '20010114Marthin';
+$db_name = 'u1572267_ambulance';
 
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '';
-$db_name = 'ambulance';
+// $db_host = 'localhost';
+// $db_user = 'root';
+// $db_pass = '';
+// $db_name = 'ambulance';
 
 $db_conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 

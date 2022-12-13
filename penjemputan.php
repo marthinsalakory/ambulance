@@ -31,6 +31,12 @@ if (isset($_POST['selesai'])) {
         </div>
     </div>
 </div>
+<div class="container-fluid p-0 m-0">
+    <div class="alert alert-warning alert-dismissible fade show mb-0" style="display: none;" role="alert" id="info_supir">
+        <strong>Info!</strong> Supir telah menuju lokasi anda.
+        <button type="button" class="btn-close" onclick="$('#info_supir').hide()"></button>
+    </div>
+</div>
 <?= flash(); ?>
 <div class="mx-auto position-relative" style="width: 100%;height: 91vh;">
     <div id="map" style="width: 100%; height: 350px;"></div>
@@ -60,6 +66,7 @@ if (isset($_POST['selesai'])) {
     }, 5000);
 
 
+    var nil = true;
     const map = L.map('map', {
         attributionControl: false
     }).setView([<?= $user_location; ?>], 13);
@@ -87,6 +94,10 @@ if (isset($_POST['selesai'])) {
             success: function(result) {
                 $('#tugas_pasien').text(result.tugas_pasien);
                 if (result.supir_id) {
+                    if (nil == true) {
+                        $('#info_supir').show();
+                        nil = false;
+                    }
                     map.removeLayer(marker_ambulance);
                     marker_ambulance = L.marker(result.lokasi_supir.split(", "), {
                         icon: L.icon({

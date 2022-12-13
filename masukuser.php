@@ -32,7 +32,7 @@ if (!empty($_POST)) {
 </div>
 <?= flash(); ?>
 <div class="mx-auto position-relative" style="width: 100%;height: 91vh;">
-    <div class="card mt-5">
+    <div class="card">
         <form method="POST" class="card-body">
             <div class="row">
                 <div class="col-3">
@@ -60,8 +60,9 @@ if (!empty($_POST)) {
             </div>
             <div class="row mt-3">
                 <div class="col-12 text-center">
-                    <button class="btn btn-light border border-dark border-1">Masuk</button><br>
-                    <a href="daftaruser.php" class="btn btn-light border border-dark border-1 my-2">Daftar</a>
+                    <button class="btn btn-light border border-dark border-1">Masuk</button>
+                    <a href="daftaruser.php" class="btn btn-light border border-dark border-1 my-2">Daftar</a><br>
+                    <a class="btn btn-light border border-dark border-1" href="darurat_user.php">Darurat</a>
                 </div>
             </div>
         </form>
